@@ -37,6 +37,7 @@ Download the latest [nonpdrm.skprx](https://github.com/TheOfficialFloW/NoNpDrm/r
 ux0:tai/nonpdrm.skprx
 ```
 
+Don't forget to reboot your device, otherwise the plugin will have no effect yet.  
 If you know what you are doing, you may change this path to an arbitrary location as long as it matches the exact location of the module. 
 You may also edit the `ur0:tai/config.txt` instead assuming you do not have a config.txt file inside the `ux0:tai/` folder
 
