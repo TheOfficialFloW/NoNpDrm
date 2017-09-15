@@ -46,7 +46,7 @@ The fake licenses for the applications will then be stored at
 - `ux0:nonpdrm/license/app/TITLE_ID/6488b73b912a753a492e2714e9b38bc7.rif`
 - `ux0:nonpdrm/license/addcont/TITLE_ID/DLC_FOLDER/6488b73b912a753a492e2714e9b38bc7.rif` (for additional content)
 
-## Sharing Digial Applications
+## Sharing Digital Applications
 - If you wish to use the application on the same device but on a different account, simply copy the fake license `6488b73b912a753a492e2714e9b38bc7.rif` to
   `ux0:license/app/TITLE_ID/6488b73b912a753a492e2714e9b38bc7.rif`.
 - If you wish to use the application on a different device, transfer the content of `ux0:app/TITLE_ID` to your PC and copy the fake license `ux0:nonpdrm/license/app/TITLE_ID/6488b73b912a753a492e2714e9b38bc7.rif` file as `TITLE_ID/sce_sys/package/work.bin` **You need to overwrite the original work.bin**
