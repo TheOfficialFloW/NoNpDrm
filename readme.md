@@ -51,7 +51,7 @@ The fake licenses for the applications will then be stored at
   `ux0:license/app/TITLE_ID/6488b73b912a753a492e2714e9b38bc7.rif`.
 - If you wish to use the application on a different device, transfer the content of `ux0:app/TITLE_ID` to your PC and copy the fake license `ux0:nonpdrm/license/app/TITLE_ID/6488b73b912a753a492e2714e9b38bc7.rif` file as `TITLE_ID/sce_sys/package/work.bin` **You need to overwrite the original work.bin**
 
-**Note**: on games obtained through the PlayStation Store, `work.bin` is tied to your Sony Interactive Entertainment (also known as PlayStation Network) account and contains your account ID.
+**Note**: on games obtained through the PlayStation Store, `work.bin` is tied to your Sony Interactive Entertainment (also known as PlayStation Network) account and contains your account ID. The fake license does however **NOT** contain any personal information.
 
 ## Sharing Game Cards
 Transfer the `gro0:app/TITLE_ID` folder and its content to `ux0:app/TITLE_ID` or to your computer and save the fake license
