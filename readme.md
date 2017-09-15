@@ -30,7 +30,7 @@ VitaShell lets you mount your PS Vita's Memory Card or Game Card to your PC over
 On a PS TV device, you can mount a USB flash drive and copy files to `uma0:`.
 
 ## Installation
-Copy `nonpdrm.skprx` to `ux0:tai` and modify the `ux0:tai/config.txt` file to add the path to the module under `*KERNEL` as follows
+Download the latest [nonpdrm.skprx](https://github.com/TheOfficialFloW/NoNpDrm/releases), copy it to `ux0:tai` and modify the `ux0:tai/config.txt` file to add the path to the module under `*KERNEL` as follows
 
 ```
 *KERNEL
