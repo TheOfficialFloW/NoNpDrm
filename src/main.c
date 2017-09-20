@@ -189,13 +189,16 @@ static SceUID _ksceKernelLaunchAppPatched(void *args) {
 
     char license_path[256];
 
-    snprintf(license_path, sizeof(license_path)-1, "gro0:license/app/%s", titleid);
-    FindLicenses(license_path);
-
     snprintf(license_path, sizeof(license_path)-1, "ux0:license/app/%s", titleid);
     FindLicenses(license_path);
 
+    snprintf(license_path, sizeof(license_path)-1, "gro0:license/app/%s", titleid);
+    FindLicenses(license_path);
+
     snprintf(license_path, sizeof(license_path)-1, "ux0:license/addcont/%s", titleid);
+    FindLicenses(license_path);
+
+    snprintf(license_path, sizeof(license_path)-1, "grw0:license/addcont/%s", titleid);
     FindLicenses(license_path);
 
     return TAI_CONTINUE(int, ksceKernelLaunchAppRef, titleid, flags, path, unk); // returns pid

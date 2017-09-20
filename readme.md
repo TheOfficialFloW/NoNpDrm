@@ -111,6 +111,14 @@ The source code is located within the `src` directory and is licensed under `GPL
 - "My game/application displays as a trial version in the livearea" - This happens because you copied a game/application featuring a trial mode, without or with an invalid/corrupt `work.bin`.
 - "I somehow messed up the installation, how can I reinstall a game?" - You can delete the (fake) license at `ux0:license/app/TITLE_ID` and use the refresh option in VitaShell.
 
+## Changelog
+
+### v1.1
+- Fixed bug where fake license files of addcont on grw0: were not created.
+
+### v1.0
+- Initial release
+
 ## Donation
 All my work is voluntary and nonprofit, however you can support my work by making a small donation - no matter how small, I'd be very thankful! Just be careful what you write to me in the message ;)  
 [Donation Link](https://www.paypal.me/PSVitaTheFloW)
