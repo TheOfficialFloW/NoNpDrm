@@ -113,6 +113,9 @@ The source code is located within the `src` directory and is licensed under `GPL
 
 ## Changelog
 
+### v1.2
+- Added support for 3.65/3.67 firmware.
+
 ### v1.1
 - Fixed bug where fake license files of addcont on grw0: were not created.
 
