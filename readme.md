@@ -122,10 +122,6 @@ The source code is located within the `src` directory and is licensed under `GPL
 ### v1.0
 - Initial release
 
-## Donation
-All my work is voluntary and nonprofit, however you can support my work by making a small donation - no matter how small, I'd be very thankful! Just be careful what you write to me in the message ;)  
-[Donation Link](https://www.paypal.me/PSVitaTheFloW)
-
 ## Special thanks
 - Thanks to Team molecule for HENkaku and thanks to [yifanlu](https://twitter.com/yifanlu) for taiHEN
 - Thanks to [Mathieulh](https://twitter.com/Mathieulh) for beta testing and helping me writing this readme
