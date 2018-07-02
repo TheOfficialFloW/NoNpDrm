@@ -5,7 +5,7 @@
 - Bypasses expiration of PlayStation Plus and other timed licenses.
 - Allows you to run trial versions as full versions.
 - Allows sharing PFS encrypted content (unmodified non decrypted games) across multiple PS Vita accounts and devices using generated fake license files.
-- Imported games behave as purchased games and allow the use of game updates seemlessly downloaded from the Sony Interactive Entertainment Network (PlayStation Network) as long as these updates run on firmware 3.60 and lower.
+- Imported games behave as purchased games and allow the use of game updates seemlessly downloaded from the Sony Interactive Entertainment Network (PlayStation Network) as long as these updates run on firmware 3.68 and lower.
 - Games can also be stripped of their PFS encryption using tools such as Vitamin just as any other purchased games would.
 - Using purchased applications on deactivated devices.
 
@@ -16,7 +16,6 @@ In a nutshell, this plugin allows you to bypass DRM protection on any PS Vita co
 - Work with PFS decrypted content (such as games dumped using applications such as Vitamin or MaiDumpTool).
 - Enable you to run applications/use content without a valid license or a fake license file.
 - Work with PlayStation Portable or PlayStation 1 titles (should you wish to play such titles, you may want to look into the [Adrenaline software](https://github.com/TheOfficialFloW/Adrenaline/releases)).
-- Work with applications that only run on firmware 3.61 or later.
 
 ## Legal Disclaimer
 - The removal and distribution of DRM content and/or circumventing copy protection mechanisms for any other purpose than archiving/preserving games you own licenses for is illegal.  
@@ -24,7 +23,7 @@ In a nutshell, this plugin allows you to bypass DRM protection on any PS Vita co
 - The author does not take any responsibility for your actions using this software.
 
 ## Software Requirements
-This software will only work on PlayStation Vita, PlayStation Vita TV, PlayStation TV devices running on firmware 3.60, the taiHEN framework and HENkaku need to be running on your device, for more information please connect to https://henkaku.xyz/  
+This software will only work on PlayStation Vita, PlayStation Vita TV, PlayStation TV devices running on firmware 3.60-3.68 the taiHEN framework and HENkaku need to be running on your device, for more information please connect to https://henkaku.xyz/  
 For all the possibilities described below, you should use [VitaShell v1.6](https://github.com/TheOfficialFloW/VitaShell/releases) or higher for faster transfers.  
 VitaShell lets you mount your PS Vita's Memory Card or Game Card to your PC over USB.  
 On a PS TV device, you can mount a USB flash drive and copy files to `uma0:`.
@@ -68,7 +67,7 @@ You may share any additonal content across devices from `ux0:addcont/TITLE_ID/DL
 To do so, copy the fake license `ux0:nonpdrm/license/addcont/TITLE_ID/DLC_FOLDER/6488b73b912a753a492e2714e9b38bc7.rif` to `ux0:license/addcont/TITLE_ID/DLC_FOLDER/6488b73b912a753a492e2714e9b38bc7.rif`.
 
 ## Sharing Game Updates
-While you may simply copy the content of `ux0:patch/TITLE_ID` or `grw0:patch/TITLE_ID` (in the case of selected card titles), game updates can be downloaded and installed directly from the PlayStation Network (unless the newest update is not compatible on 3.60).
+While you may simply copy the content of `ux0:patch/TITLE_ID` or `grw0:patch/TITLE_ID` (in the case of selected card titles), game updates can be downloaded and installed directly from the PlayStation Network (unless the newest update is not compatible on 3.60-3.68).
 
 ## Installing shared applications
 - Digital Application and Game Cards must be stored at the following location: `ux0:app/TITLE_ID`
