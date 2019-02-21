@@ -180,6 +180,94 @@ static int FindLicenses(char *path) {
   return 0;
 }
 
+static int SetAddcontId (char* const addcontid, char const* const titleid) {
+  /* Copyright (C) 2019 Fumu-no-Kagomeko */
+  struct {
+    uint32_t magic;
+    uint32_t version;
+    uint32_t keys_off;
+    uint32_t data_off;
+    uint32_t entries;
+  } sfo_hdr;
+  struct {
+    uint16_t keys_off;
+    uint16_t data_fmt;
+    uint32_t data_len;
+    uint32_t data_max;
+    uint32_t data_off;
+  } entry;
+  int size;
+  SceUID fd;
+  char data[48];
+
+  snprintf(data, sizeof(data), "ux0:app/%s/sce_sys/param.sfo", titleid);
+  fd = ksceIoOpen(data, SCE_O_RDONLY, 0);
+
+  if (fd < 0)
+  {
+    snprintf(data, sizeof(data), "gro0:app/%s/sce_sys/param.sfo", titleid);
+    fd = ksceIoOpen(data, SCE_O_RDONLY, 0);
+
+    if (fd < 0)
+    {
+      return 0;
+    }
+  }
+
+  size = ksceIoRead(fd, &sfo_hdr, sizeof(sfo_hdr));
+
+  if (size != sizeof(sfo_hdr) || sfo_hdr.magic != 0x46535000)
+  {
+    goto not_found;
+  }
+
+  for (uint32_t i = 0; i < sfo_hdr.entries; ++i)
+  {
+    size = 0x14 + sizeof(entry) * i;
+    size = ksceIoPread(fd, &entry, sizeof(entry), size);
+
+    if (size < 0 || size != sizeof(entry))
+    {
+      goto not_found;
+    }
+    else
+    if (entry.data_max != 12 || entry.data_fmt != 0x0204)
+    {
+      continue;
+    }
+
+    size = sfo_hdr.keys_off + entry.keys_off;
+    size = ksceIoPread(fd, data, 32, size);
+
+    if (size < 0)
+    {
+      goto not_found;
+    }
+    else
+    if (size < 20 || strncmp(data, "INSTALL_DIR_ADDCONT", 32))
+    {
+      continue;
+    }
+
+    size = sfo_hdr.data_off + entry.data_off;
+    size = ksceIoPread(fd, data, 12, size);
+
+    if (size != 12)
+    {
+      goto not_found;
+    }
+
+    memcpy(addcontid, data, 12);
+    addcontid[11] = 0;
+    ksceIoClose(fd);
+    return 1;
+  }
+
+not_found:
+  ksceIoClose(fd);
+  return 0;
+}
+
 static SceUID _ksceKernelLaunchAppPatched(void *args) {
   char *titleid  = (char *)((uintptr_t *)args)[0];
   uint32_t flags = (uint32_t)((uintptr_t *)args)[1];
@@ -187,6 +275,7 @@ static SceUID _ksceKernelLaunchAppPatched(void *args) {
   void *unk      = (void *)((uintptr_t *)args)[3];
 
   char license_path[512];
+  char addcontid[12];
 
   snprintf(license_path, sizeof(license_path), "ux0:license/app/%s", titleid);
   FindLicenses(license_path);
@@ -199,6 +288,15 @@ static SceUID _ksceKernelLaunchAppPatched(void *args) {
 
   snprintf(license_path, sizeof(license_path), "grw0:license/addcont/%s", titleid);
   FindLicenses(license_path);
+
+  if (SetAddcontId(addcontid, titleid))
+  {
+    snprintf(license_path, sizeof(license_path), "ux0:license/addcont/%s", addcontid);
+    FindLicenses(license_path);
+
+    snprintf(license_path, sizeof(license_path), "grw0:license/addcont/%s", addcontid);
+    FindLicenses(license_path);
+  }
 
   return TAI_CONTINUE(int, ksceKernelLaunchAppRef, titleid, flags, path, unk); // returns pid
 }
