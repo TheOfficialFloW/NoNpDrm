@@ -18,14 +18,11 @@
 
 #include <psp2kern/kernel/modulemgr.h>
 #include <psp2kern/kernel/sysmem.h>
+#include <psp2kern/kernel/sysclib.h>
 #include <psp2kern/kernel/threadmgr.h>
 #include <psp2kern/io/dirent.h>
 #include <psp2kern/io/fcntl.h>
 #include <psp2kern/io/stat.h>
-
-#include <stdio.h>
-#include <string.h>
-
 #include <taihen.h>
 
 #define FAKE_AID 0x0123456789ABCDEFLL
@@ -64,7 +61,7 @@ typedef struct {
   uint8_t rsa_signature[0x100];     // 0x100
 } SceNpDrmLicense;
 
-int ksceNpDrmGetFixedRifName(char *rif_name, uint32_t flags, uint64_t is_gc);
+int ksceNpDrmGetFixedRifName(char *rif_name, SceUInt64 aid);
 int ksceNpDrmGetRifVitaKey(SceNpDrmLicense *license_buf, uint8_t *klicensee, uint32_t *flags,
                            uint32_t *sku_flag, uint64_t *start_time, uint64_t *expiration_time);
 
@@ -93,7 +90,7 @@ static int MakeFakeLicense(char *license_path, SceNpDrmLicense *license_buf) {
     return -1;
 
   // Get fixed rif name
-  res = ksceNpDrmGetFixedRifName(rif_name, 0, 0LL);
+  res = ksceNpDrmGetFixedRifName(rif_name, 0LL);
   if (res < 0)
     return res;
 
@@ -103,6 +100,10 @@ static int MakeFakeLicense(char *license_path, SceNpDrmLicense *license_buf) {
     return -2;
 
   snprintf(path, sizeof(path), "ux0:nonpdrm/%s/%s", p + 1, rif_name);
+
+  SceIoStat stat;
+  if(ksceIoGetstat(path, &stat) >= 0)
+    return 0; // Already has fake license
 
   // Make license structure
   SceNpDrmLicense license;
@@ -417,7 +418,7 @@ static int ksceNpDrmGetRifNamePatched(char *rif_name, uint32_t flags, uint64_t a
 
   // Allow applications on non-activated devices by using fixed rif name
   if (res < 0)
-    return ksceNpDrmGetFixedRifName(rif_name, 0, 0LL);
+    return ksceNpDrmGetFixedRifName(rif_name, 0LL);
 
   return res;
 }
@@ -427,7 +428,7 @@ static int ksceNpDrmGetRifNameForInstallPatched(char *rif_name, SceNpDrmLicense 
 
   // Use fixed rif name for fake license
   if (license_buf && license_buf->aid == FAKE_AID)
-    return ksceNpDrmGetFixedRifName(rif_name, 0, 0LL);
+    return ksceNpDrmGetFixedRifName(rif_name, 0LL);
 
   return res;
 }
